@@ -1,0 +1,156 @@
+
+import serial
+import tkinter
+import tkinter as tk  
+from tkinter import *
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import numpy as np
+
+
+class windowclass2():
+
+        def __init__(self , master):
+                self.master = master
+                self.frame = tk.Frame(master)
+                self.master.geometry("1400x1200")
+                master.title("LOGIN PAGE")
+                self.quitButton= tk.Label(self.master, text="User Name:")
+                self.quitButton1= tk.Label(self.master, text="Password:")
+                e1 = tk.Entry(self.master)
+                e2 = tk.Entry(self.master)
+                self.quitButton.pack()
+                e1.pack()
+                self.quitButton1.pack()
+                e2.pack()
+                self.quitButton2 = tk.Button(self.frame, text = 'Login', width = 25,command=self.new_window)
+                self.quitButton2.pack(fill = X, expand = True, ipady = 5)
+                self.frame.pack()
+               
+               
+                   
+        def new_window(self):
+                 
+                   self.newWindow1 = tk.Toplevel(self.master)
+                   self.app = windowclass(self.newWindow1)
+                   self.master.withdraw()
+
+
+class windowclass():
+       
+        def __init__(self,master):
+                self.master = master
+                self.frame = tk.Frame(master)
+                self.master.geometry("1400x1200")
+                self.btn = Button(master , text = "ON" , background = "brown",font = "Helvetica 16 bold italic",fg = "white", command = self.command )
+                self.btn1 = Button(master , text = "OFF" , background = "blue",font = "Helvetica 16 bold italic",fg = "white", command = self.command1 )
+                self.btn2 = Button(master , text = "VOLTAGE" , background = "green",font = "Helvetica 16 bold italic",fg = "white", command = self.command2 )
+               # self.btn3 = Button(master , text = "CURRENT" , background = "purple",font = "Helvetica 16 bold italic",fg = "white", command = self.command3 )
+                self.btn.pack(fill = BOTH, expand = True)
+                self.btn1.pack(fill = BOTH, expand = True)
+                self.btn2.pack(fill = BOTH, expand = True)
+                #self.btn3.pack(fill = BOTH, expand = True)
+                self.frame.pack()
+
+        def command(self):
+                print ('ON is pressed!')
+               
+     
+        def command1(self):
+                print ('OFF is pressed!')
+               
+        def command2(self):
+                print ('VOLTAGE is pressed!')
+                self.newWindow = tk.Toplevel(self.master)
+                self.app = windowclass1(self.newWindow)
+                self.master.withdraw()
+        def command3(self):
+                print ('CURRENT is pressed!')
+                self.newWindow = tk.Toplevel(self.master)
+                self.app = windowclass1(self.newWindow)
+                self.master.withdraw()
+class windowclass1():
+
+        def __init__(self , master):
+                self.master = master
+               
+                self.frame = tk.Frame(master)
+                self.master.geometry("1400x1200")
+                master.title("DISPLAY VALUES")
+                self.quitButton= tk.Label(self.master, text="DATE:")
+                self.quitButton1= tk.Label(self.master, text="TIME:")
+                self.quitButton3= tk.Label(self.master, text="VALUE:")
+               
+                e1 = tk.Entry(self.master)
+                e2 = tk.Entry(self.master)
+                e3 = tk.Entry(self.master)
+               
+                self.quitButton.pack()
+                e1.pack()
+                self.quitButton1.pack()
+                e2.pack()
+                self.quitButton3.pack(fill = BOTH, expand = True)
+                self.quitButton2 = tk.Button(self.frame, text = 'BACK',background = "brown",fg="white", width = 15 , command = self.close_window)
+                self.quitButton4 = tk.Button(self.frame, text = 'HOME',background = "green",fg="white", width = 15 , command = self.new_window)
+                self.quitButton5 = tk.Button(self.frame, text = 'GRAPH',background = "blue",fg="white", width = 15 , command = self.graph_window)
+                self.quitButton.pack()
+                self.quitButton1.pack()
+                self.quitButton2.pack(side = LEFT)
+                self.quitButton4.pack(side = RIGHT)
+                self.quitButton5.pack()
+                self.frame.pack(fill = BOTH, expand = True)
+                result=5
+                self.quitButton3.config(text="VALUE OF POT: %d V" % result)  
+               
+        def close_window(self):
+                   self.master.withdraw()
+                   self.newWindow1 = tk.Toplevel(self.master)
+                   self.app = windowclass(self.newWindow1)
+
+        def new_window(self):
+                   self.master.withdraw()
+                   self.newWindow1 = tk.Toplevel(self.master)
+                   self.app = windowclass2(self.newWindow1)
+        def graph_window(self):
+                   self.master.withdraw()
+                   self.newWindow1 = tk.Toplevel(self.master)
+                   self.app = windowclass3(self.newWindow1)
+class windowclass3:
+        def plot(self,master):
+                   self.master = master
+                   self.frame = tk.Frame(master)
+                   self.master.geometry("1400x1200")
+                   master.title("GRAPH")
+       
+                   #x=np.array ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+                  # v= np.array ([16,16.31925,17.6394,16.003,17.2861,17.3131,19.1259,18.9694,22.0003,22.81226])
+                   #p= np.array ([16.23697,     17.31653,     17.22094,     17.68631,     17.73641 ,    18.6368,
+                  # 19.32125,     19.31756 ,    21.20247  ,   22.41444   ,  22.11718  ,   22.12453])
+
+       # plt.scatter(v,x,color='red')
+                  # plt.plot(p, range(2 +max(x)),color='blue')
+                  # plt.gca().invert_yaxis()
+
+                   #plt.suptitle ("Estimation Grid", fontsize=16)
+                  # plt.ylabel("Y", fontsize=14)
+                   #plt.xlabel("X", fontsize=14)
+                  # plt.show()
+                  # plt.gcf().canvas.draw()
+                  # fig = plt.figure()
+                  # canvas = FigureCanvasTkAgg(fig, master=window)
+                  # canvas.get_tk_widget().grid(row=1,column=24)
+                  # canvas.draw()
+
+
+root = Tk()
+
+root.title("CLICK ME!")
+
+root.geometry("1400x1200")
+
+windowclass2(root)
+
+root.mainloop()
+
+
+
